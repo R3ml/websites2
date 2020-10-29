@@ -1,15 +1,19 @@
 package com.kea.websites2.model;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 
 @Entity
-@Table(name = "orders", schema = "heroku_5debde97bb52f42", catalog = "")
+@Table(name = "orders", schema = "heroku_5debde97bb52f42")
 public class Order {
     private int id;
     private Product productsByProductsId;
     private Customer customersByCustomersId;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
+    @GenericGenerator(name = "native", strategy = "native")
     @Column(name = "id", nullable = false)
     public int getId() {
         return id;

@@ -1,10 +1,13 @@
 package com.kea.websites2.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 import java.util.Collection;
 
 @Entity
-@Table(name = "customers", schema = "heroku_5debde97bb52f42", catalog = "")
+@Table(name = "customers", schema = "heroku_5debde97bb52f42")
 public class Customer {
     private int id;
     private String firstName;
@@ -13,6 +16,8 @@ public class Customer {
     private Collection<Order> ordersById;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
+    @GenericGenerator(name = "native", strategy = "native")
     @Column(name = "id", nullable = false)
     public int getId() {
         return id;
@@ -77,6 +82,7 @@ public class Customer {
     }
 
     @OneToMany(mappedBy = "customersByCustomersId")
+    @JsonBackReference
     public Collection<Order> getOrdersById() {
         return ordersById;
     }
