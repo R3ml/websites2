@@ -17,6 +17,15 @@ public class Product {
     private String imgUrl;
     private Collection<Order> ordersById;
 
+    //Constructor for testing purposes
+    public Product(String name, double price, String type, String description, String imgUrl) {
+        this.name = name;
+        this.price = price;
+        this.type = type;
+        this.description = description;
+        this.imgUrl = imgUrl;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
     @GenericGenerator(name = "native", strategy = "native")
