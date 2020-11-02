@@ -66,6 +66,21 @@ public class ProductIntegrationTests {
     }
 
     @Test
+    public void should_find_products_that_contain_searchterm_in_name() {
+        Product p1 = new Product("Webshop Template 1", 101.0, "test1", "test1", "test1");
+        Product p2 = new Product("Something Else", 102.0, "test2", "test2", "test2");
+        Product p3 = new Product("webshopz Template 2", 103.0, "test3", "test3", "test3");
+        entityManager.persist(p1);
+        entityManager.persist(p2);
+        entityManager.persist(p3);
+
+        List<Product> productList = repo.findByNameContaining("webshop");
+        assertThat(productList).hasSize(2);
+        assertThat(productList).contains(p1,p3);
+    }
+
+
+    @Test
     public void should_update_product() {
         Product p = new Product("p1", 100.0, "test1", "test1", "test1");
         entityManager.persist(p);
