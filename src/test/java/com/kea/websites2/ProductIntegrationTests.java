@@ -10,6 +10,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -89,6 +90,21 @@ public class ProductIntegrationTests {
         assertThat(checkP.getImgUrl()).isEqualTo(updatedP.getImgUrl());
     }
 
-    
+    @Test
+    public void should_delete_by_id() {
+        Product p1 = new Product("p1", 101.0, "test1", "test1", "test1");
+        Product p2 = new Product("p2", 102.0, "test2", "test2", "test2");
+        Product p3 = new Product("p3", 103.0, "test3", "test3", "test3");
+        entityManager.persist(p1);
+        entityManager.persist(p2);
+        entityManager.persist(p3);
+
+        repo.deleteById(p3.getId());
+
+        List<Product> productList = repo.findAll();
+
+        assertThat(productList).hasSize(2);
+        assertThat(productList).contains(p1, p2);
+    }
 
 }
