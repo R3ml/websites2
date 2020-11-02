@@ -18,9 +18,16 @@ public class ProductController {
 
    //Get all products
    @GetMapping("/products")
-    public ResponseEntity<List<Product>> getAllProducts()
+    public ResponseEntity<List<Product>> getAllProducts(@RequestParam(required = false) String searchTerm)
     {
-        List<Product> productList = productRepo.findAll();
+        List<Product> productList;
+        if(searchTerm == null) {
+            productList = productRepo.findAll();
+        } else {
+            productList = productRepo.findByNameContaining(searchTerm);
+        }
+
+
         if(productList.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
