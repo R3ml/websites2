@@ -7,7 +7,7 @@ import javax.persistence.*;
 import java.util.Collection;
 
 @Entity
-@Table(name = "products", schema = "heroku_5debde97bb52f42")
+@Table(name = "products")
 public class Product {
     private int id;
     private String name;
