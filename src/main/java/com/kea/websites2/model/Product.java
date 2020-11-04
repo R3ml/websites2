@@ -7,7 +7,7 @@ import javax.persistence.*;
 import java.util.Collection;
 
 @Entity
-@Table(name = "products", schema = "heroku_5debde97bb52f42")
+@Table(name = "products")
 public class Product {
     private int id;
     private String name;
@@ -16,6 +16,15 @@ public class Product {
     private String description;
     private String imgUrl;
     private Collection<Order> ordersById;
+
+    //Constructor for testing purposes
+    public Product(String name, double price, String type, String description, String imgUrl) {
+        this.name = name;
+        this.price = price;
+        this.type = type;
+        this.description = description;
+        this.imgUrl = imgUrl;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")

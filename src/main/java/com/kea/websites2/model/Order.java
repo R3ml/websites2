@@ -5,7 +5,7 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "orders", schema = "heroku_5debde97bb52f42")
+@Table(name = "orders")
 public class Order {
     private int id;
     private Product productsByProductsId;
