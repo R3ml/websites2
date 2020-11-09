@@ -1,21 +1,43 @@
 package com.kea.websites2.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import org.hibernate.annotations.GenericGenerator;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.Collection;
 
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
 @Table(name = "products")
 public class Product {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
+    @GenericGenerator(name = "native", strategy = "native")
+    @Column(name = "id", nullable = false)
     private int id;
+
+    @Basic
+    @Column(name = "name", nullable = false, length = 45)
     private String name;
+
+    @Basic
+    @Column(name = "price", nullable = false, precision = 0)
     private double price;
+
+    @Basic
+    @Column(name = "type", nullable = false, length = 45)
     private String type;
+
+    @Basic
+    @Column(name = "description", nullable = false, columnDefinition = "TEXT")
     private String description;
+
+    @Basic
+    @Column(name = "img_url", nullable = true, length = 255)
     private String imgUrl;
-    private Collection<Order> ordersById;
 
     //Constructor for testing purposes
     public Product(String name, double price, String type, String description, String imgUrl) {
@@ -23,68 +45,6 @@ public class Product {
         this.price = price;
         this.type = type;
         this.description = description;
-        this.imgUrl = imgUrl;
-    }
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
-    @GenericGenerator(name = "native", strategy = "native")
-    @Column(name = "id", nullable = false)
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    @Basic
-    @Column(name = "name", nullable = false, length = 45)
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    @Basic
-    @Column(name = "price", nullable = false, precision = 0)
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
-    @Basic
-    @Column(name = "type", nullable = false, length = 45)
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    @Basic
-    @Column(name = "description", nullable = false, length = -1)
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    @Basic
-    @Column(name = "img_url", nullable = true, length = 255)
-    public String getImgUrl() {
-        return imgUrl;
-    }
-
-    public void setImgUrl(String imgUrl) {
         this.imgUrl = imgUrl;
     }
 
@@ -117,15 +77,5 @@ public class Product {
         result = 31 * result + (description != null ? description.hashCode() : 0);
         result = 31 * result + (imgUrl != null ? imgUrl.hashCode() : 0);
         return result;
-    }
-
-    @OneToMany(mappedBy = "productsByProductsId")
-    @JsonBackReference
-    public Collection<Order> getOrdersById() {
-        return ordersById;
-    }
-
-    public void setOrdersById(Collection<Order> ordersById) {
-        this.ordersById = ordersById;
     }
 }

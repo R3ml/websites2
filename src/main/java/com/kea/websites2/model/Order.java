@@ -1,27 +1,32 @@
 package com.kea.websites2.model;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
 @Table(name = "orders")
 public class Order {
-    private int id;
-    private Product productsByProductsId;
-    private Customer customersByCustomersId;
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
     @GenericGenerator(name = "native", strategy = "native")
     @Column(name = "id", nullable = false)
-    public int getId() {
-        return id;
-    }
+    private int id;
 
-    public void setId(int id) {
-        this.id = id;
-    }
+    @ManyToOne
+    @JoinColumn(name = "products_id", referencedColumnName = "id", nullable = false)
+    private Product productsByProductsId;
+
+    @ManyToOne
+    @JoinColumn(name = "customers_id", referencedColumnName = "id", nullable = false)
+    private Customer customersByCustomersId;
+
 
     @Override
     public boolean equals(Object o) {
@@ -38,25 +43,5 @@ public class Order {
     @Override
     public int hashCode() {
         return id;
-    }
-
-    @ManyToOne
-    @JoinColumn(name = "products_id", referencedColumnName = "id", nullable = false)
-    public Product getProductsByProductsId() {
-        return productsByProductsId;
-    }
-
-    public void setProductsByProductsId(Product productsByProductsId) {
-        this.productsByProductsId = productsByProductsId;
-    }
-
-    @ManyToOne
-    @JoinColumn(name = "customers_id", referencedColumnName = "id", nullable = false)
-    public Customer getCustomersByCustomersId() {
-        return customersByCustomersId;
-    }
-
-    public void setCustomersByCustomersId(Customer customersByCustomersId) {
-        this.customersByCustomersId = customersByCustomersId;
     }
 }

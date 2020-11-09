@@ -28,7 +28,7 @@ public class CustomerController {
     }
 
     //Get a customer by id
-    @GetMapping("/customer/{id}")
+    @GetMapping("/customers/{id}")
     public ResponseEntity<Customer> getCustomerById(@PathVariable("id") int id) {
         Customer customer = customerRepo.findById(id)
             .orElseThrow(() -> new ResourceNotFoundException("Customer", "id", id));
@@ -37,26 +37,25 @@ public class CustomerController {
     }
 
     //Create a customer
-    @PostMapping("/customer")
+    @PostMapping("/customers")
     public ResponseEntity<Customer> createCustomer(@RequestBody Customer customer) {
         return new ResponseEntity<>(customerRepo.save(customer), HttpStatus.CREATED);
     }
 
     //Update a customer
-    @PutMapping("/customer/{id}")
+    @PutMapping("/customers/{id}")
     public ResponseEntity<Customer> updateCustomer(@PathVariable("id") int id, @RequestBody Customer customer) {
         Customer _customer = customerRepo.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Customer", "id", id));
         customer.setFirstName(customer.getFirstName());
         customer.setLastName(customer.getLastName());
         customer.setEmail(customer.getEmail());
-        customer.setOrdersById(customer.getOrdersById());
 
         return new ResponseEntity<>(customerRepo.save(customer), HttpStatus.OK);
     }
 
     //Delete a customer
-    @DeleteMapping("/customer/{id}")
+    @DeleteMapping("/customers/{id}")
     public ResponseEntity<HttpStatus> deleteCustomer(@PathVariable("id") int id) {
        customerRepo.deleteById(id);
        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
