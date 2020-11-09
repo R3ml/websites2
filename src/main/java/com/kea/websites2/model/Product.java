@@ -15,7 +15,6 @@ public class Product {
     private String type;
     private String description;
     private String imgUrl;
-    private Collection<Order> ordersById;
 
     //Constructor for testing purposes
     public Product(String name, double price, String type, String description, String imgUrl) {
@@ -25,6 +24,8 @@ public class Product {
         this.description = description;
         this.imgUrl = imgUrl;
     }
+
+    public Product() {}
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
@@ -69,7 +70,7 @@ public class Product {
     }
 
     @Basic
-    @Column(name = "description", nullable = false, length = -1)
+    @Column(name = "description", nullable = false, columnDefinition = "TEXT")
     public String getDescription() {
         return description;
     }
@@ -117,15 +118,5 @@ public class Product {
         result = 31 * result + (description != null ? description.hashCode() : 0);
         result = 31 * result + (imgUrl != null ? imgUrl.hashCode() : 0);
         return result;
-    }
-
-    @OneToMany(mappedBy = "productsByProductsId")
-    @JsonBackReference
-    public Collection<Order> getOrdersById() {
-        return ordersById;
-    }
-
-    public void setOrdersById(Collection<Order> ordersById) {
-        this.ordersById = ordersById;
     }
 }

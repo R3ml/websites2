@@ -50,7 +50,6 @@ public class CustomerController {
         customer.setFirstName(customer.getFirstName());
         customer.setLastName(customer.getLastName());
         customer.setEmail(customer.getEmail());
-        customer.setOrdersById(customer.getOrdersById());
 
         return new ResponseEntity<>(customerRepo.save(customer), HttpStatus.OK);
     }

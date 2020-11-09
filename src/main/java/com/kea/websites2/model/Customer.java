@@ -13,7 +13,6 @@ public class Customer {
     private String firstName;
     private String lastName;
     private String email;
-    private Collection<Order> ordersById;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
@@ -79,15 +78,5 @@ public class Customer {
         result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
         result = 31 * result + (email != null ? email.hashCode() : 0);
         return result;
-    }
-
-    @OneToMany(mappedBy = "customersByCustomersId")
-    @JsonBackReference
-    public Collection<Order> getOrdersById() {
-        return ordersById;
-    }
-
-    public void setOrdersById(Collection<Order> ordersById) {
-        this.ordersById = ordersById;
     }
 }
