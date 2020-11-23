@@ -1,8 +1,6 @@
 package com.kea.websites2.controller;
 
-import com.kea.websites2.exception.ResourceNotFoundException;
 import com.kea.websites2.model.Customer;
-import com.kea.websites2.repository.CustomerRepo;
 import com.kea.websites2.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
