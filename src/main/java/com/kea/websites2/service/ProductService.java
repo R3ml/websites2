@@ -23,7 +23,7 @@ import java.util.Objects;
 @Service
 public class ProductService {
     @Autowired
-    ProductRepo repo;
+    ProductRepo productRepo;
 
     public PagingResponse getAllProducts(Specification<Product> spec, HttpHeaders headers, Sort sort) {
         if (isRequestPaged(headers)) {
@@ -45,18 +45,18 @@ public class ProductService {
     }
 
     public PagingResponse getAllProducts(Specification<Product> spec, Pageable pageable) {
-        Page<Product> page = repo.findAll(spec, pageable);
+        Page<Product> page = productRepo.findAll(spec, pageable);
         List<Product> content = page.getContent();
         return new PagingResponse(page.getTotalElements(), (long) page.getNumber(), (long) page.getNumberOfElements(), pageable.getOffset(), (long) page.getTotalPages(), content);
     }
 
     public List<Product> getAllProducts(Specification<Product> spec, Sort sort) {
-        return repo.findAll(spec, sort);
+        return productRepo.findAll(spec, sort);
     }
 
     //Get a product by id
     public ResponseEntity<Product> getProductById(int id) {
-        Product product = repo.findById(id)
+        Product product = productRepo.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Product", "id", id));
 
         return new ResponseEntity<>(product, HttpStatus.OK);
@@ -64,12 +64,12 @@ public class ProductService {
 
     //Create a product
     public ResponseEntity<Product> createProduct(Product product) {
-        return new ResponseEntity<>(repo.save(product), HttpStatus.CREATED);
+        return new ResponseEntity<>(productRepo.save(product), HttpStatus.CREATED);
     }
 
     //Update a product
     public ResponseEntity<Product> updateProduct(int id, Product product) {
-        Product _product = repo.findById(id)
+        Product _product = productRepo.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Product", "id", id));
         _product.setName(product.getName());
         _product.setPrice(product.getPrice());
@@ -82,7 +82,7 @@ public class ProductService {
 
     //Delete a product
     public ResponseEntity<HttpStatus> deleteProduct(int id) {
-        repo.deleteById(id);
+        productRepo.deleteById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 

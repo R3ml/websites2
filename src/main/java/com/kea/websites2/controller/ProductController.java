@@ -1,6 +1,5 @@
 package com.kea.websites2.controller;
 
-import com.kea.websites2.exception.ResourceNotFoundException;
 import com.kea.websites2.model.Product;
 import com.kea.websites2.model.utils.PagingHeaders;
 import com.kea.websites2.model.utils.PagingResponse;
