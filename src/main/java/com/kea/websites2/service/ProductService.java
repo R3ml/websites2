@@ -4,7 +4,6 @@ import com.kea.websites2.model.Product;
 import com.kea.websites2.model.utils.PagingHeaders;
 import com.kea.websites2.model.utils.PagingResponse;
 import com.kea.websites2.repository.ProductRepo;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
