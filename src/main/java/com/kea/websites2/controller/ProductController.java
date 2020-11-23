@@ -52,24 +52,24 @@ public class ProductController {
     //Get a product by id
     @GetMapping("/products/{id}")
     public ResponseEntity<Product> getProductById(@PathVariable("id") int id) {
-        productService.getProductById(id);
+        return productService.getProductById(id);
     }
 
     //Create a product
     @PostMapping("/products")
     public ResponseEntity<Product> createProduct(@RequestBody Product product) {
-        productService.createProduct(product);
+        return productService.createProduct(product);
     }
 
     //Update a product
     @PutMapping("/products/{id}")
     public ResponseEntity<Product> updateProduct(@PathVariable("id") int id, @RequestBody Product product) {
-        productService.updateProduct(id, product);
+        return productService.updateProduct(id, product);
     }
 
     //Delete a product
     @DeleteMapping("/products/{id}")
     public ResponseEntity<HttpStatus> deleteProduct(@PathVariable("id") int id) {
-       productService.deleteProduct(id);
+       return productService.deleteProduct(id);
     }
 }

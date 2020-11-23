@@ -19,31 +19,31 @@ public class CustomerController {
    @GetMapping("/customers")
     public ResponseEntity<List<Customer>> getAllCustomers()
     {
-       customerService.getAllCustomers();
+       return customerService.getAllCustomers();
     }
 
     //Get a customer by id
     @GetMapping("/customers/{id}")
     public ResponseEntity<Customer> getCustomerById(@PathVariable("id") int id) {
-        customerService.getCustomerById(id);
+        return customerService.getCustomerById(id);
     }
 
     //Create a customer
     @PostMapping("/customers")
     public ResponseEntity<Customer> createCustomer(@RequestBody Customer customer) {
-        customerService.createCustomer(customer);
+        return customerService.createCustomer(customer);
     }
 
     //Update a customer
     @PutMapping("/customers/{id}")
     public ResponseEntity<Customer> updateCustomer(@PathVariable("id") int id, @RequestBody Customer customer) {
-        customerService.updateCustomer(id, customer);
+       return customerService.updateCustomer(id, customer);
     }
 
     //Delete a customer
     @DeleteMapping("/customers/{id}")
     public ResponseEntity<HttpStatus> deleteCustomer(@PathVariable("id") int id) {
-       customerService.deleteCustomer(id);
+       return customerService.deleteCustomer(id);
     }
     
 }

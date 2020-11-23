@@ -35,6 +35,6 @@ public class OrderController {
     //Delete an order
     @DeleteMapping("/orders/{id}")
     public ResponseEntity<HttpStatus> deleteOrder(@PathVariable("id") int id) {
-        orderService.deleteOrder(id);
+        return orderService.deleteOrder(id);
     }
 }
