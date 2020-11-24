@@ -1,10 +1,10 @@
 package com.kea.websites2.service;
 
+import com.kea.websites2.exception.ResourceNotFoundException;
 import com.kea.websites2.model.Product;
 import com.kea.websites2.model.utils.PagingHeaders;
 import com.kea.websites2.model.utils.PagingResponse;
 import com.kea.websites2.repository.ProductRepo;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -12,7 +12,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
 
 import java.util.List;
 import java.util.Objects;
@@ -20,7 +23,7 @@ import java.util.Objects;
 @Service
 public class ProductService {
     @Autowired
-    ProductRepo repo;
+    ProductRepo productRepo;
 
     public PagingResponse getAllProducts(Specification<Product> spec, HttpHeaders headers, Sort sort) {
         if (isRequestPaged(headers)) {
@@ -42,13 +45,45 @@ public class ProductService {
     }
 
     public PagingResponse getAllProducts(Specification<Product> spec, Pageable pageable) {
-        Page<Product> page = repo.findAll(spec, pageable);
+        Page<Product> page = productRepo.findAll(spec, pageable);
         List<Product> content = page.getContent();
         return new PagingResponse(page.getTotalElements(), (long) page.getNumber(), (long) page.getNumberOfElements(), pageable.getOffset(), (long) page.getTotalPages(), content);
     }
 
     public List<Product> getAllProducts(Specification<Product> spec, Sort sort) {
-        return repo.findAll(spec, sort);
+        return productRepo.findAll(spec, sort);
+    }
+
+    //Get a product by id
+    public ResponseEntity<Product> getProductById(int id) {
+        Product product = productRepo.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Product", "id", id));
+
+        return new ResponseEntity<>(product, HttpStatus.OK);
+    }
+
+    //Create a product
+    public ResponseEntity<Product> createProduct(Product product) {
+        return new ResponseEntity<>(productRepo.save(product), HttpStatus.CREATED);
+    }
+
+    //Update a product
+    public ResponseEntity<Product> updateProduct(int id, Product product) {
+        Product _product = productRepo.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Product", "id", id));
+        _product.setName(product.getName());
+        _product.setPrice(product.getPrice());
+        _product.setType(product.getType());
+        _product.setDescription(product.getDescription());
+        _product.setImgUrl(product.getImgUrl());
+
+        return new ResponseEntity<>(productRepo.save(_product), HttpStatus.OK);
+    }
+
+    //Delete a product
+    public ResponseEntity<HttpStatus> deleteProduct(int id) {
+        productRepo.deleteById(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
 }

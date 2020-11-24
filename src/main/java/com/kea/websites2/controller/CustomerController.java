@@ -1,8 +1,7 @@
 package com.kea.websites2.controller;
 
-import com.kea.websites2.exception.ResourceNotFoundException;
 import com.kea.websites2.model.Customer;
-import com.kea.websites2.repository.CustomerRepo;
+import com.kea.websites2.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,51 +13,37 @@ import java.util.List;
 public class CustomerController {
 
     @Autowired
-    CustomerRepo customerRepo;
+    CustomerService customerService;
 
    //Get all customers
    @GetMapping("/customers")
     public ResponseEntity<List<Customer>> getAllCustomers()
     {
-        List<Customer> customerList = customerRepo.findAll();
-        if(customerList.isEmpty()) {
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        }
-        return new ResponseEntity<>(customerList,HttpStatus.OK);
+       return customerService.getAllCustomers();
     }
 
     //Get a customer by id
     @GetMapping("/customers/{id}")
     public ResponseEntity<Customer> getCustomerById(@PathVariable("id") int id) {
-        Customer customer = customerRepo.findById(id)
-            .orElseThrow(() -> new ResourceNotFoundException("Customer", "id", id));
-
-        return new ResponseEntity<>(customer, HttpStatus.OK);
+        return customerService.getCustomerById(id);
     }
 
     //Create a customer
     @PostMapping("/customers")
     public ResponseEntity<Customer> createCustomer(@RequestBody Customer customer) {
-        return new ResponseEntity<>(customerRepo.save(customer), HttpStatus.CREATED);
+        return customerService.createCustomer(customer);
     }
 
     //Update a customer
     @PutMapping("/customers/{id}")
     public ResponseEntity<Customer> updateCustomer(@PathVariable("id") int id, @RequestBody Customer customer) {
-        Customer _customer = customerRepo.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Customer", "id", id));
-        customer.setFirstName(customer.getFirstName());
-        customer.setLastName(customer.getLastName());
-        customer.setEmail(customer.getEmail());
-
-        return new ResponseEntity<>(customerRepo.save(customer), HttpStatus.OK);
+       return customerService.updateCustomer(id, customer);
     }
 
     //Delete a customer
     @DeleteMapping("/customers/{id}")
     public ResponseEntity<HttpStatus> deleteCustomer(@PathVariable("id") int id) {
-       customerRepo.deleteById(id);
-       return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+       return customerService.deleteCustomer(id);
     }
     
 }
