@@ -1,7 +1,6 @@
 package com.kea.websites2;
 
 import com.kea.websites2.model.Customer;
-import com.kea.websites2.model.Product;
 import com.kea.websites2.repository.CustomerRepo;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -35,7 +34,7 @@ public class CustomerIntegrationTests {
 
     @Test
     public void should_save_customer() {
-        Customer customer = repo.save(new Customer("test", "testLn", "test@gmail.com));
+        Customer customer = repo.save(new Customer("test", "testLn", "test@gmail.com"));
         assertThat(customer).hasFieldOrPropertyWithValue("firstName", "test");
         assertThat(customer).hasFieldOrPropertyWithValue("lastName", "testLn");
         assertThat(customer).hasFieldOrPropertyWithValue("email", "test@gmail.com");
@@ -58,7 +57,7 @@ public class CustomerIntegrationTests {
         entityManager.persist(c1);
         entityManager.persist(c2);
 
-        Product foundProduct = repo.findById(c2.getId()).get();
+        Customer foundProduct = repo.findById(c2.getId()).get();
         assertThat(foundProduct).isEqualTo(c2);
     }
 
