@@ -1,10 +1,9 @@
-import React from "react";
+import React, {Component} from "react";
 import {Link} from "react-router-dom";
 
-class NavbarComponent extends Component {
+class Navbar extends Component {
     render() {
         return(
-            <div className="app">
                 <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
                     <a className="navbar-brand" href="#">Websites2</a>
 
@@ -28,7 +27,8 @@ class NavbarComponent extends Component {
                         </ul>
                     </div>
                 </nav>
-            </div>
         )
     }
 }
+
+export default Navbar;
