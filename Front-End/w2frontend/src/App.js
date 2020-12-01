@@ -12,7 +12,7 @@ class App extends Component {
       return (
           <Router>
             <Navbar />
-            <div className="container-expand mt-3">
+            <div className="container-expand bg-secondary">
                 <Switch>
                     <Route
                         exact

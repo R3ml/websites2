@@ -1,5 +1,7 @@
 import React, {Component} from "react";
 import ProductService from "../../service/ProductService";
+import { Link } from "react-router-dom";
+
 
 class ProductList extends Component {
     constructor(props) {
@@ -31,21 +33,32 @@ class ProductList extends Component {
     }
 
     render() {
+
+
         const products = this.state.products;
         const productsRender = products.map((product) => {
-            return <li className="media d-flex justify-content-center">
-                <img className="mr-3" src={product.imgUrl} alt="Product image"/>
-                <div className="media-body">
-                    <h5 className="mt-0 mb-1">{product.name}</h5>
-                    {product.price}dkk Category: {product.type}
+            return <div className="card my-5 list-item mx-auto" style={{width: "40rem"}}>
+                    <img className="card-img-top" src={product.imgUrl} alt="Product image" />
+                        <div className="card-body text-center">
+                            <h4 className="card-title">{product.name}</h4>
+                            <h5 style={{fontStyle: "italic"}}>{product.price} kr<br/>Type: {product.type}</h5>
+                                <p className="card-text">{product.description}</p>
+                            <Link
+                                to={"/products/" + product.id}
+                                className="btn btn-secondary btn-lg"
+                            >
+                            Buy
+                        </Link>
+                        </div>
                 </div>
-            </li>
+
         })
         return (
-            <ul className="list-unstyled">
-                {productsRender}
-            </ul>
-        )
+            <div className="d-flex" >
+                <ul className="list-unstyled row">
+                    {productsRender}
+                </ul>
+            </div>)
     }
 }
 

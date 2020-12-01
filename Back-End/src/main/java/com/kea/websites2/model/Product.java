@@ -36,7 +36,7 @@ public class Product {
     private String description;
 
     @Basic
-    @Column(name = "img_url", nullable = true, length = 255)
+    @Column(name = "img_url", nullable = true, length = 255, columnDefinition = "varchar(255) default 'https://assets.awwwards.com/awards/submissions/2018/04/5acb5268dea5f.jpg'")
     private String imgUrl;
 
     //Constructor for testing purposes
