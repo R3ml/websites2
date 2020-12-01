@@ -37,7 +37,7 @@ class ProductList extends Component {
 
         const products = this.state.products;
         const productsRender = products.map((product) => {
-            return <div className="card my-5 list-item mx-auto" style={{width: "40rem"}}>
+            return <div className="card my-5 list-item mx-auto" style={{width: "35rem"}}>
                     <img className="card-img-top" src={product.imgUrl} alt="Product image" />
                         <div className="card-body text-center">
                             <h4 className="card-title">{product.name}</h4>
