@@ -10,7 +10,14 @@ class ProductService {
     }
 
     create(data) {
-        return http.post("/products", data);
+        return http
+            .post("/products", data)
+            .then((response) => {
+                console.log(response.data);
+            })
+            .catch((e)=> {
+                console.log(e);
+            })
     }
 
     update(id, data) {
