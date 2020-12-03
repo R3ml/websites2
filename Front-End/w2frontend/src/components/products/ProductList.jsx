@@ -8,7 +8,7 @@ class ProductList extends Component {
         super(props);
 
         this.getProducts = this.getProducts.bind(this);
-
+        this.deleteProduct = this.deleteProduct.bind(this);
         this.state = {
             products: [],
         }
@@ -32,6 +32,10 @@ class ProductList extends Component {
         this.getProducts();
     }
 
+    deleteProduct() {
+        //ProductService.delete(id);
+    }
+
     render() {
 
 
@@ -48,7 +52,8 @@ class ProductList extends Component {
                                 className="btn btn-secondary btn-lg"
                             >
                             Buy
-                        </Link>
+                            </Link>
+                            <button type="submit" className="btn btn-dark btn-lg">Delete</button>
                         </div>
                 </div>
 

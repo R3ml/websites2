@@ -25,7 +25,14 @@ class ProductService {
     }
 
     delete(id) {
-        return http.delete(`/products/${id}`);
+        return http
+            .delete('/products/' + id)
+            .then((response) => {
+                console.log(response.data);
+            })
+            .catch((e) => {
+                console.log(e);
+            });
     }
 }
 
