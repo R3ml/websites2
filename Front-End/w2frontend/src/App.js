@@ -5,6 +5,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 import Navbar from "./components/Navbar";
 import ProductList from "./components/products/ProductList";
+import Product from "./components/products/Product";
 
 class App extends Component {
   render() {
@@ -12,12 +13,16 @@ class App extends Component {
       return (
           <Router>
             <Navbar />
-            <div className="container-expand bg-secondary">
+            <div className="container-fluid h-100 bg-secondary">
                 <Switch>
                     <Route
-                        exact
-                        path={["/", "/products"]}
+                        exact path={["/", "/products"]}
                         component={ProductList}
+                    />
+
+                    <Route
+                        exact path="/add"
+                        component={Product}
                     />
                 </Switch>
             </div>

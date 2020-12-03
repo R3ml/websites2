@@ -54,10 +54,22 @@ class ProductList extends Component {
 
         })
         return (
-            <div className="d-flex" >
-                <ul className="list-unstyled row">
-                    {productsRender}
-                </ul>
+            <div className="container-fluid" >
+                <div className="row-cols-1 pt-5 mb-2 text-center">
+                    <Link
+                        to={"/add"}
+                        className="btn btn-dark btn-lg text-center"
+                    >
+                        Add a product
+                    </Link>
+                </div>
+                <div className="row d-flex">
+                    <div className="col-md-auto">
+                        <ul className="list-unstyled row">
+                            {productsRender}
+                        </ul>
+                    </div>
+                </div>
             </div>)
     }
 }
