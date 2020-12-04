@@ -3,35 +3,34 @@ import React, { Component } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 
+import Navbar from "./components/Navbar";
+import ProductList from "./components/products/ProductList";
+import AddProduct from "./components/products/AddProduct";
+import EditProduct from "./components/products/EditProduct";
+
 class App extends Component {
   render() {
       console.log(process.env.REACT_APP_NAME);
       return (
           <Router>
-            <div className="app">
-                <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-                    <a className="navbar-brand" href="#">Websites2</a>
+            <Navbar />
+            <div className="container-fluid h-100 bg-secondary">
+                <Switch>
+                    <Route
+                        exact path={["/", "/products"]}
+                        component={ProductList}
+                    />
 
-                    <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul className="navbar-nav mr-auto">
-                            <li className="nav-item">
-                                <Link to={"/products"} className="nav-link">
-                                    Products
-                                </Link>
-                            </li>
-                            <li className="nav-item">
-                                <Link to={"/customers"} className="nav-link">
-                                    Customers
-                                </Link>
-                            </li>
-                            <li className="nav-item">
-                                <Link to={"/orders"} className="nav-link">
-                                    Orders
-                                </Link>
-                            </li>
-                        </ul>
-                    </div>
-                </nav>
+                    <Route
+                        exact path="/products/add"
+                        component={AddProduct}
+                    />
+
+                    <Route
+                        exact path="/products/:id"
+                        component={EditProduct}
+                    />
+                </Switch>
             </div>
           </Router>
       );
