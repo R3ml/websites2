@@ -12,6 +12,7 @@ class ProductList extends Component {
 
         this.state = {
             products: [],
+            message: ""
         }
     }
 
@@ -35,20 +36,38 @@ class ProductList extends Component {
 
     deleteProduct(id) {
         console.log("Delete " + id)
-        ProductService.delete(id);
-        window.location.reload(false);
+        ProductService
+            .delete(id)
+            .then(() => {
+                this.setState({
+                    message: "Product deleted successfully"
+                })
+                this.refreshList();
+                window.scrollTo(0,0);
+            })
+            .catch(e => {
+                console.log(e);
+            })
     }
 
-    productsRender() {
-
-
-        //return
+    refreshList() {
+        this.getProducts();
     }
 
     render() {
         const products = this.state.products;
         return (
             <div className="container-fluid" >
+                {
+                    this.state.message !== "" ?
+                        (<div className="row-cols-1 pt-3 text-center">
+                            <div className="alert alert-danger pt-2" role="alert">
+                                {this.state.message}
+                            </div>
+                        </div>) : (
+                            console.log("No delete")
+                        )
+                }
                 <div className="row-cols-1 pt-5 mb-2 text-center">
                     <Link
                         to={"/add"}
@@ -62,22 +81,29 @@ class ProductList extends Component {
                         <ul className="list-unstyled row">
                             {products.map((product) => {
                                 return <div key={product.id} className="card my-5 list-item mx-auto" style={{width: "35rem"}}>
-                                    <img className="card-img-top" src={product.imgUrl} alt="Product image"/>
+                                    <img className="card-img-top" src={product.imgUrl} alt="AddProduct image"/>
                                     <div className="card-body text-center">
                                         <h4 className="card-title">{product.name}</h4>
                                         <h5 style={{fontStyle: "italic"}}>{product.price} kr<br/>Type: {product.type}</h5>
                                         <p className="card-text">{product.description}</p>
                                         <Link
-                                            to={"/products/" + product.id}
+                                            to={"/buy/" + product.id}
                                             className="btn btn-secondary btn-lg"
                                         >
                                             Buy
+                                        </Link>
+                                        <Link
+                                            to={"/products/" + product.id}
+                                            className="btn btn-danger btn-lg"
+                                        >
+                                            Edit
                                         </Link>
                                         <button type="submit" className="btn btn-dark btn-lg"
                                                 onClick={(e)=> {
                                                     this.deleteProduct(product.id);
                                                 }}>Delete
                                         </button>
+
                                     </div>
                                 </div>
                             })}

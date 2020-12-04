@@ -5,7 +5,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 import Navbar from "./components/Navbar";
 import ProductList from "./components/products/ProductList";
-import Product from "./components/products/Product";
+import AddProduct from "./components/products/AddProduct";
 
 class App extends Component {
   render() {
@@ -22,7 +22,7 @@ class App extends Component {
 
                     <Route
                         exact path="/add"
-                        component={Product}
+                        component={AddProduct}
                     />
                 </Switch>
             </div>

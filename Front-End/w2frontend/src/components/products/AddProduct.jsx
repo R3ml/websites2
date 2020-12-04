@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import ProductService from "../../service/ProductService";
 
-class Product extends Component {
+class AddProduct extends Component {
     constructor(props) {
         super(props);
         this.onChangeName = this.onChangeName.bind(this);
@@ -10,8 +10,9 @@ class Product extends Component {
         this.onChangeDescription = this.onChangeDescription.bind(this);
         this.onChangeImgUrl = this.onChangeImgUrl.bind(this);
         this.saveProduct = this.saveProduct.bind(this);
+
         this.state = {
-            submitted: false,
+            message: "",
             currentProduct: {
                 id: null,
                 name: "",
@@ -68,20 +69,36 @@ class Product extends Component {
         console.log(data)
         ProductService
             .create(data)
-            .then(this.setState({
-                submitted : true
-            }))
+            .then(() => {
+                this.setState({
+                    message: "Product successfully added"
+                })
+                window.scrollTo(0,0);
+            })
+            .catch((e) => {
+                console.log(e);
+            })
     }
 
 
     render() {
         return (
             <div className="container container-sm">
+                {
+                    this.state.message !== "" ?
+                        (<div className="row-cols-1 pt-3 text-center">
+                            <div className="alert alert-danger pt-2" role="alert">
+                                {this.state.message}
+                            </div>
+                        </div>) : (
+                            console.log("Not added yet")
+                        )
+                }
                 <div className="row">
                     <div className="col">
                     </div>
                     <div className="col col-lg-8">
-                        <form>
+                        <form onSubmit={(e => e.preventDefault())}>
                             <div className="form-group">
                                 <label htmlFor="product-name">Product name</label>
                                 <input className="form-control" type="text"  id="product-name"
@@ -100,7 +117,7 @@ class Product extends Component {
                                     <option>Personal</option>
                                     <option>Business</option>
                                     <option>Portfolio</option>
-                                    <option>Webshop</option>
+                                    <option>Web shop</option>
                                     <option>Blog</option>
                                     <option>Online newspaper</option>
                                 </select>
@@ -119,7 +136,7 @@ class Product extends Component {
                             </div>
 
                             <div className="form-group text-center">
-                                <button type="submit" className="btn btn-dark btn-lg" onClick={this.saveProduct}>Add</button>
+                                <button className="btn btn-dark btn-lg" onClick={this.saveProduct}>Add</button>
                             </div>
                         </form>
                     </div>
@@ -131,4 +148,4 @@ class Product extends Component {
     }
 }
 
-export default Product;
+export default AddProduct;
