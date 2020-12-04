@@ -32,7 +32,8 @@ public class Product {
     private String type;
 
     @Basic
-    @Column(name = "description", nullable = false, columnDefinition = "TEXT")
+    @Lob
+    @Column(name = "description", nullable = false)
     private String description;
 
     @Basic

@@ -6,6 +6,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Navbar from "./components/Navbar";
 import ProductList from "./components/products/ProductList";
 import AddProduct from "./components/products/AddProduct";
+import EditProduct from "./components/products/EditProduct";
 
 class App extends Component {
   render() {
@@ -21,8 +22,13 @@ class App extends Component {
                     />
 
                     <Route
-                        exact path="/add"
+                        exact path="/products/add"
                         component={AddProduct}
+                    />
+
+                    <Route
+                        exact path="/products/:id"
+                        component={EditProduct}
                     />
                 </Switch>
             </div>

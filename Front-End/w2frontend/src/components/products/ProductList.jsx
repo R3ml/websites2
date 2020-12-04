@@ -70,7 +70,7 @@ class ProductList extends Component {
                 }
                 <div className="row-cols-1 pt-5 mb-2 text-center">
                     <Link
-                        to={"/add"}
+                        to={"/products/add"}
                         className="btn btn-dark btn-lg text-center"
                     >
                         Add a product
