@@ -14,10 +14,6 @@
     <name>websites2</name>
     <description>Project for 3rd Semester Programming</description>
 
-    <properties>
-        <java.version>15</java.version>
-    </properties>
-
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
