@@ -10,7 +10,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @CrossOrigin(origins = {
-        "http://localhost:8081"
+        "http://localhost:8081",
+        "https://websites2-frontend.herokuapp.com"
 })
 @RestController
 public class CustomerController {
