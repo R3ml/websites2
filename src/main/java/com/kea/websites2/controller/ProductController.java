@@ -43,6 +43,7 @@ public class ProductController {
 
     public HttpHeaders returnHttpHeaders(PagingResponse response) {
         HttpHeaders headers = new HttpHeaders();
+        headers.set("Access-Control-Expose-Headers", PagingHeaders.PAGE_TOTAL.getName());
         headers.set(PagingHeaders.COUNT.getName(), String.valueOf(response.getCount()));
         headers.set(PagingHeaders.PAGE_SIZE.getName(), String.valueOf(response.getPageSize()));
         headers.set(PagingHeaders.PAGE_OFFSET.getName(), String.valueOf(response.getPageOffset()));
