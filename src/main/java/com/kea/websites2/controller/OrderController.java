@@ -21,8 +21,7 @@ public class OrderController {
 
     //Get all orders
     @GetMapping("/orders")
-    public ResponseEntity<List<Order>> getAllOrders()
-    {
+    public ResponseEntity<List<Order>> getAllOrders() {
         return orderService.getAllOrders();
     }
 
@@ -36,5 +35,12 @@ public class OrderController {
     @DeleteMapping("/orders/{id}")
     public ResponseEntity<HttpStatus> deleteOrder(@PathVariable("id") int id) {
         return orderService.deleteOrder(id);
+    }
+
+    //Create an Order
+    @PostMapping("/orders")
+    public ResponseEntity<Order> createOrder(@RequestBody Order order) {
+        System.out.println(order);
+        return orderService.createOrder(order);
     }
 }
