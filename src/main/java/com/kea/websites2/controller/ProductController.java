@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 @CrossOrigin(origins = {
         "http://localhost:8081"
+        "https://websites2-frontend.herokuapp.com/"
 })
 @RestController
 public class ProductController {
@@ -43,6 +44,7 @@ public class ProductController {
 
     public HttpHeaders returnHttpHeaders(PagingResponse response) {
         HttpHeaders headers = new HttpHeaders();
+        //exposing the page total so we can access it in react
         headers.set("Access-Control-Expose-Headers", PagingHeaders.PAGE_TOTAL.getName());
         headers.set(PagingHeaders.COUNT.getName(), String.valueOf(response.getCount()));
         headers.set(PagingHeaders.PAGE_SIZE.getName(), String.valueOf(response.getPageSize()));
