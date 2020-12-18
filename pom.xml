@@ -15,7 +15,7 @@
     <description>Project for 3rd Semester Programming</description>
     <packaging>war</packaging>
     <properties>
-        <java.version>11</java.version>
+        <java.version>9</java.version>
     </properties>
 
     <dependencies>
@@ -90,8 +90,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.1</version>
                 <configuration>
-                    <source>11</source>
-                    <target>11</target>
+                    <source>9</source>
+                    <target>9</target>
                 </configuration>
             </plugin>
         </plugins>
