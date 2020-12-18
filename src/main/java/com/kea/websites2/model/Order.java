@@ -19,13 +19,13 @@ public class Order {
     @Column(name = "id", nullable = false)
     private int id;
 
-    @ManyToOne
-    @JoinColumn(name = "products_id", referencedColumnName = "id", nullable = false)
-    private Product productsByProductsId;
+    @Basic
+    @Column(name = "products_id",  nullable = false)
+    private int productsId;
 
-    @ManyToOne
-    @JoinColumn(name = "customers_id", referencedColumnName = "id", nullable = false)
-    private Customer customersByCustomersId;
+    @Basic
+    @Column(name = "customers_id", nullable = false)
+    private int customersId;
 
 
     @Override
