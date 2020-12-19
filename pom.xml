@@ -13,7 +13,7 @@
     <version>0.0.1-SNAPSHOT</version>
     <name>websites2</name>
     <description>Project for 3rd Semester Programming</description>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
     <properties>
         <java.version>9</java.version>
     </properties>
