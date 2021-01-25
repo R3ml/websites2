@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin(origins = "http://54.210.156.14/")
+@CrossOrigin(origins = "http://54.210.156.14/5000")
 @RestController
 public class CustomerController {
 
